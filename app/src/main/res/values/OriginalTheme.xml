@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="originalTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#f48fb1</item>
+        <item name="colorPrimaryVariant">#bf5f82</item>
+        <item name="colorOnPrimary">#000000</item>
+
+        <item name="colorSecondary">#ffcdd2</item>
+        <item name="colorSecondaryVariant">#cb9ca1</item>
+        <item name="colorOnSecondary">#000000</item>
+        <item name="colorSurface">#ffffff</item>
+        <item name="colorOnSurface">#000000</item>
+    </style>
+</resources>
