@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import java.io.Serializable;
+
 @Entity(tableName = "DataTable")
 public class Data implements Serializable {  //DB내의 Table
     @PrimaryKey(autoGenerate = true) public int uid;
@@ -46,4 +47,10 @@ public class Data implements Serializable {  //DB내의 Table
     String print(){
         return String.format("[%s] %s (%s) %d원",category, name,(isHot==true?"HOT":"ICE"),price);
     }
+    boolean find(String n, boolean isH){
+        if(n.contentEquals(name) && isH == isHot)
+            return true;
+        return false;
+    }
 }
+

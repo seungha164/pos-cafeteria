@@ -43,13 +43,11 @@ public class Frag3 extends Fragment implements View.OnClickListener {
     RecyclerView rv;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-
+    private ArrayAdapter spinnerAdapter;
     private String mParam1;
     private String mParam2;
 
-    // addMenu를 위한 변수
-    int mode = -1;
-    String chipCategory;
+
 
     HomeActivity parent;
     public Frag3(Activity parent) {
@@ -84,12 +82,10 @@ public class Frag3 extends Fragment implements View.OnClickListener {
         return view;
     }
     private void SpinnerSet() {
-        // spinner SET
-        ArrayAdapter arrayAdapter= new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item,new ArrayList<>(parent.categorys));
-        spinner.setAdapter(arrayAdapter);
+        spinnerAdapter= new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item,parent.allCategorys);
+        spinner.setAdapter(spinnerAdapter);
     }
     private void AdapterSet() {
-
         rv.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         rv.setLayoutManager(layoutManager);
@@ -97,7 +93,6 @@ public class Frag3 extends Fragment implements View.OnClickListener {
         rv.setAdapter(adapter);
         System.out.println("@ adapterSet() end");
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -122,25 +117,41 @@ public class Frag3 extends Fragment implements View.OnClickListener {
         alertDialog.setCancelable(false);
         alertDialog.show();
         Button submit = dlgView.findViewById(R.id.btnDlgfab2);
-        Button back = dlgView.findViewById(R.id.ibtnDlgfab2_B);
-        EditText et = dlgView.findViewById(R.id.etDlgfab2_cate);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(et.getText()!=null && et.getText().toString().trim()!=""){
-                    String cName = et.getText().toString().trim();
-
-                }
-            }
-        });
+        ImageButton back = dlgView.findViewById(R.id.ibtnDlgfab2_B);
+        EditText et = dlgView.findViewById(R.id.etDlgfab2_cafe);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
             }
         });
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(et.getText()!=null && et.getText().toString().trim()!=""){
+                    String tmpName = et.getText().toString().trim();
+                    if(parent.findCategory(tmpName))
+                       parent.toast("이미 존재하는 카테고리입니다.");
+                    else{
+                        CData newC = new CData();
+                        newC.cname = et.getText().toString().trim();
+                        parent.database.cdataDao().insert(newC);
+                        parent.allCategorys.clear();
+                        parent.allCategorys.addAll(parent.database.cdataDao().CgetName());
+                        spinnerAdapter.notifyDataSetChanged();
+                        parent.toast("추가 완료");
+                        alertDialog.dismiss();
+                    }
+                }
+                else
+                    parent.toast("추가할 내용을 입력하세요");
+            }
+        });
     }
     void addMenu(){
+        // 초기화
+        final int[] mode = {-1};
+        final String[] chipCategory = new String[1];
         View dlgView = getLayoutInflater().inflate(R.layout.dialogf3_fab1,null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(dlgView);
@@ -159,25 +170,26 @@ public class Frag3 extends Fragment implements View.OnClickListener {
         btnHot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mode = (mode==0?-1:0);
+                mode[0] = (mode[0] ==0?-1:0);
             }
         });
         Button btnIce = dlgView.findViewById(R.id.btnDlgIce);
         btnIce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mode = (mode==1?-1:1);
+                mode[0] = (mode[0] ==1?-1:1);
             }
         });
         EditText etPay = dlgView.findViewById(R.id.etDlgF3_pay);    // 3. price
-        ChipGroup chipGroup = dlgView.findViewById(R.id.chip_groupDlg);     // 4. category
-        for(String category: parent.categorys){
+        // 4. category
+        ChipGroup chipGroup = dlgView.findViewById(R.id.chip_groupDlg);
+        for(String category: parent.allCategorys){
             Chip chip = new Chip(getContext());
             chip.setText(category);
             chip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    chipCategory = category;
+                    chipCategory[0] = category;
                 }
             });
             chipGroup.addView(chip);
@@ -188,12 +200,15 @@ public class Frag3 extends Fragment implements View.OnClickListener {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(etName.getText()==null || etPay.getText()==null || mode==-1||chipCategory=="")
+                if(etName.getText()==null || etPay.getText()==null || mode[0] ==-1
+                        || chipCategory[0] =="" ||etName.getText().toString().trim().contentEquals(""))
                     Toast.makeText(getContext(), "모두 입력해주세요", Toast.LENGTH_SHORT).show();
                 else{
                     String sName = etName.getText().toString().trim();
-                    if(!sName.equals("")){
-                        Data data = setData(sName,mode==0?true:false,Integer.valueOf(etPay.getText().toString()),chipCategory);
+                    if(parent.findData(sName, mode[0] ==0?true:false))
+                        parent.toast("이미 존재하는 메뉴입니다.");
+                    else{
+                        Data data = setData(sName, mode[0] ==0?true:false,Integer.valueOf(etPay.getText().toString()), chipCategory[0]);
                         parent.database.dataDao().insert(data);
                         alertDialog.dismiss();
                         parent.dataList.clear();
@@ -204,7 +219,6 @@ public class Frag3 extends Fragment implements View.OnClickListener {
                 }
             }
         });
-        // category 추가
     }
     private Data setData(String n, boolean isH,int p,String c){
         Data d = new Data();
