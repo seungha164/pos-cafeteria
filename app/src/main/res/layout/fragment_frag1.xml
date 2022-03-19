@@ -10,50 +10,30 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:layout_weight="5"
+        android:layout_weight="2"
         android:background="@color/white"
         android:elevation="10dp"
         android:orientation="vertical"
         android:padding="10dp">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
+            android:id="@+id/tabsF1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ALL" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="COFFEE" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DRINK" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ETC" />
-        </com.google.android.material.tabs.TabLayout>
+            android:background="@color/white"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvH1"
+            android:id="@+id/rvF1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:padding="10dp"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:background="@color/white"
         android:elevation="10dp"
         android:orientation="vertical"

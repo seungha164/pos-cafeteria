@@ -3,10 +3,17 @@ package com.example.pos;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,30 +22,24 @@ import android.view.ViewGroup;
  */
 public class Frag1 extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    TabLayout tabs;
+    RecyclerView rv;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public Frag1() {
-        // Required empty public constructor
+    String cCategory;
+    HomeActivity parent;
+    public Frag1(HomeActivity parent) {
+        this.parent = parent;
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Frag1.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Frag1 newInstance(String param1, String param2) {
-        Frag1 fragment = new Frag1();
+        Frag1 fragment = new Frag1(new HomeActivity());
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -58,7 +59,49 @@ public class Frag1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frag1, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_frag1, container, false);
+        tabs = view.findViewById(R.id.tabsF1);
+        rv = view.findViewById(R.id.rvF1);
+        tabSetting();
+        rvSetting();
+        return view;
+    }
+    void rvSetting(){
+        adapter = new GridViewAdapter(getContext(),parent.dataList,this);
+        layoutManager = new GridLayoutManager(getContext(),4);
+        rv.setLayoutManager(layoutManager);
+        rv.setAdapter(adapter);
+    }
+    void tabSetting(){
+        cCategory = "All";
+        for(String cName:parent.allCategorys)
+            tabs.addTab(tabs.newTab().setText(cName));
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {  // tab상태가 선택 상태로 변경
+                cCategory = tab.getText().toString();
+                classify(cCategory);
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {    // tab의 상태가 선택되지 않음으로 변경
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {    // 이미 선택된 tab이 다시시
+            }
+        });
+    }
+    void addBasket(Data d){
+        parent.toast(d.print());
+
+    }
+    void classify(String condition){
+        List<Data> tmp;
+        if(condition.contentEquals("All"))
+            tmp = parent.dataList;
+        else
+            tmp = parent.database.dataDao().getOrderbyCategory(condition);
+
+        adapter = new GridViewAdapter(getContext(),(ArrayList<Data>)tmp,this);
+        rv.setAdapter(adapter);
     }
 }

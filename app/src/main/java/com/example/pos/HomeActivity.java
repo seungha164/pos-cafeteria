@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,7 +45,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btnPos = findViewById(R.id.ibtnHome_shopper);
         btnCal = findViewById(R.id.ibtnHome_calc);
         btnAdd = findViewById(R.id.ibtnHome_postadd);
-        frag1 = new Frag1();
+        frag1 = new Frag1(this);
         frag2 = new Frag2(this);
         frag3 = new Frag3(this);
 
@@ -52,26 +54,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btnCal.setOnClickListener(this);
         btnAdd.setOnClickListener(this);
     }
-
-
     private void DB_setting() {
         database = DataDB.getInstance(this);
         // - cTable 불러오기
         allCategorys = database.cdataDao().CgetName();   // 전체 카테고리
+        Collections.reverse(allCategorys);
         // - dataTable 불러오기
         // 1. 카테고리
         categorys = database.dataDao().getCategory();
         for(String category:categorys){
-            List<Data> tmp = database.dataDao().getO(category);
+            List<Data> tmp = database.dataDao().getOrderbyCategory(category);
             dataMap.put(category,tmp);
         }
         dataList = (ArrayList<Data>) database.dataDao().getAll();
-        /* test
-        System.out.println("=>"+dataList.size());
-        for(Data i:dataList){
-            System.out.println(i.print());
-        }
-         */
     }
     boolean findCategory(String kwd){
         for(String cate:allCategorys)

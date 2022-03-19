@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,7 +48,7 @@ public class Frag3 extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
 
-
+    String cCondition;
 
     HomeActivity parent;
     public Frag3(Activity parent) {
@@ -84,14 +85,35 @@ public class Frag3 extends Fragment implements View.OnClickListener {
     private void SpinnerSet() {
         spinnerAdapter= new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item,parent.allCategorys);
         spinner.setAdapter(spinnerAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                cCondition = parent.allCategorys.get(i);
+                classifyRv(cCondition);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                cCondition = "All";
+                classifyRv(cCondition);
+            }
+        });
+    }
+    void classifyRv(String condition){
+        List<Data> tmp;
+        if(condition.contentEquals("All"))
+            tmp = parent.dataList;
+        else
+            tmp = parent.database.dataDao().getOrderbyCategory(condition);
+
+        adapter = new CustomAdapter(getContext(),tmp,parent.database);
+        rv.setAdapter(adapter);
     }
     private void AdapterSet() {
         rv.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         rv.setLayoutManager(layoutManager);
-        adapter = new CustomAdapter(getContext(),parent.dataList);
+        adapter = new CustomAdapter(getContext(),parent.dataList,parent.database);
         rv.setAdapter(adapter);
-        System.out.println("@ adapterSet() end");
     }
     @Override
     public void onClick(View v) {
@@ -152,6 +174,7 @@ public class Frag3 extends Fragment implements View.OnClickListener {
         // 초기화
         final int[] mode = {-1};
         final String[] chipCategory = new String[1];
+
         View dlgView = getLayoutInflater().inflate(R.layout.dialogf3_fab1,null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(dlgView);
@@ -214,6 +237,7 @@ public class Frag3 extends Fragment implements View.OnClickListener {
                         parent.dataList.clear();
                         parent.dataList.addAll(parent.database.dataDao().getAll());
                         adapter.notifyDataSetChanged();
+                        classifyRv(cCondition);
                         parent.toast("추가 완료");
                     }
                 }

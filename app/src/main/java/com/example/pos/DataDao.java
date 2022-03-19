@@ -18,7 +18,7 @@ public interface DataDao {  // DB에 접근해 질의를 수행. - 데이터 접
     List<String> getCategory();
 
     @Query("SELECT * FROM datatable WHERE category=:c")
-    List<Data> getO(String c);
+    List<Data> getOrderbyCategory(String c);
 /*
     @Update // UPDATE : 데이터베이스 테이블에서 특정 행을 업데이트.
     @Query("UPDATE DataTable SET price = :sPrice WHERE name = :sID")

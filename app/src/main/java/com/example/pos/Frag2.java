@@ -32,7 +32,6 @@ public class Frag2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_frag2, container, false);
-        parent.toast("OH MY GOD");
         return view;
     }
 }
