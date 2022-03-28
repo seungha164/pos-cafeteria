@@ -47,8 +47,8 @@ public class Data implements Serializable {  //DB내의 Table
     String print(){
         return String.format("[%s] %s (%s) %d원",category, name,(isHot==true?"HOT":"ICE"),price);
     }
-    boolean find(String n, boolean isH){
-        if(n.contentEquals(name) && isH == isHot)
+    boolean find(Data d){
+        if(d.name.contentEquals(name) && d.isHot == isHot)
             return true;
         return false;
     }

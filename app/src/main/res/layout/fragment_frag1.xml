@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -38,23 +39,20 @@
         android:elevation="10dp"
         android:orientation="vertical"
         android:padding="10dp">
-
-        <ImageView
+        <ImageButton
+            android:background="@color/white"
+            android:layout_gravity="right"
+            android:id="@+id/ibtnFrag1_basketReset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/basket" />
+            android:src="@drawable/refresh" />
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvF1_basket"
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"
-            android:fillViewport="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </androidx.core.widget.NestedScrollView>
+            android:layout_weight="5" />
 
         <LinearLayout
             android:padding="10dp"
@@ -62,16 +60,30 @@
             android:layout_height="wrap_content"
             android:background="#CFCBCB"
             android:orientation="vertical">
-            <TextView
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="COUPON" />
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="COUPON"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:background="#CFCBCB"
+                    android:layout_gravity="right"
+                    android:id="@+id/ibtnF1_Creset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/refresh" />
+            </FrameLayout>
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip4"
-                android:text="3,000"
-                android:layout_width="wrap_content"
+                android:id="@+id/chipF1_C"
+                style="@style/Widget.MaterialComponents.Chip.Action"
+                android:textAlignment="center"
+                android:text="1,500"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,15 +93,17 @@
                     android:layout_height="wrap_content"
                     android:text="할인 금액 : "/>
                 <TextView
+                    android:id="@+id/tvF1_Ctotal"
                     android:textAlignment="textEnd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="$ 1.00"/>
+                    android:text="0 원"/>
 
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:padding="10dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
@@ -102,19 +116,19 @@
                 android:textStyle="bold"
                 android:text="total" />
             <TextView
+                android:textStyle="bold"
+                android:id="@+id/tvFrag1_BTotal"
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:textAlignment="textEnd"
                 android:layout_height="wrap_content"
-                android:text="$ 2.00" />
+                android:text="0 원" />
 
         </LinearLayout>
-
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnF1_pay"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="결제" />
     </LinearLayout>
 

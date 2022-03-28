@@ -103,6 +103,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <com.google.android.material.chip.ChipGroup
+                app:singleSelection="true"
                 android:id="@+id/chip_groupDlg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

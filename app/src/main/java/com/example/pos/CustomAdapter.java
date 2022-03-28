@@ -24,12 +24,12 @@ import java.util.List;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>{
     private Context context;
     private List<Data> dataList;
-    DataDB db;
+    DataDao dao;
 
-    public CustomAdapter(Context context, List<Data> dataList, DataDB database){
+    public CustomAdapter(Context context, List<Data> dataList, DataDao dao){
         this.context = context;
         this.dataList = dataList;
-        this.db = database;
+        this.dao = dao;
     }
     @NonNull
     @Override
@@ -49,14 +49,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         return (null!=dataList?dataList.size():0);
     }
     public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView idx,name,pay,isHot;
+        TextView idx,name,pay;
         ImageButton del,edit;
         Chip category;
         Data data;
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             idx = itemView.findViewById(R.id.tvData_idx);
-            isHot = itemView.findViewById(R.id.tvData_isH);
             name = itemView.findViewById(R.id.tvData_name);
             pay = itemView.findViewById(R.id.tvData_pay);
             del = itemView.findViewById(R.id.ibtnData_del);
@@ -64,10 +63,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             category = itemView.findViewById(R.id.chipData);
         }
         void onBind(int i,Data d){
-            idx.setText(""+i);
-            isHot.setText(d.isHot()==true?"HOT":"ICE");
+            idx.setText(""+(i+1));
             pay.setText(String.format("%d원",d.price));
-            name.setText(d.name);
+            name.setText(String.format("%s (%s)",d.name,d.isHot()?"HOT":"ICE"));
             category.setText(d.category);
             data = d;
             del.setOnClickListener(this);
@@ -83,9 +81,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i){
-                    db.dataDao().delete(data);
+                    dao.delete(data);
                     dataList.remove(data);
-                    System.out.println(data.print());
                     notifyDataSetChanged();
                 }
             });

@@ -16,4 +16,21 @@ public interface CDataDao{
     List<CData> CgetAll();
     @Query("SELECT cname FROM CTable")
     List<String> CgetName();
+    @Query("SELECT * FROM CTable where cname=:c")
+    CData Cget(String c);
+}
+@Dao
+interface ODataDao{
+    @Insert(onConflict = REPLACE)
+    void insert(Order order);
+    @Query("SELECT * FROM OTable")
+    List<Order> getAll();
+    @Delete
+    void delete(Order oData);
+
+    @Query("DELETE FROM OTable")
+    void deleteAll();
+
+    @Query("SELECT * FROM OTable WHERE oDate like :d")
+    List<Order> getOrderbyDate(String d);
 }

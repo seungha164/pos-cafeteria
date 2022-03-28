@@ -5,4 +5,65 @@
     android:layout_height="match_parent"
     tools:context=".Frag2">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabsF2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="left">
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상품" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="카테고리" />
+
+        </com.google.android.material.tabs.TabLayout>
+        <FrameLayout
+            android:id="@+id/vpFrag2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabF3_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="30dp"
+        android:clickable="true"
+        android:contentDescription="add"
+        android:src="@drawable/postadd" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabF3_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="120dp"
+        android:clickable="true"
+        android:elevation="6dp"
+        android:src="@drawable/coffee"
+        android:visibility="invisible"
+        android:background="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabF3_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="210dp"
+        android:clickable="true"
+        android:elevation="6dp"
+        android:src="@drawable/category"
+        android:visibility="invisible"
+        android:background="@color/white"/>
 </FrameLayout>

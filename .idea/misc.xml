@@ -4,29 +4,47 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38177083333333334" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/drawable/add.xml" value="0.4578125" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/drawable/basket.xml" value="0.5734375" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/drawable/border.xml" value="0.378125" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/drawable/close.xml" value="0.4578125" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/drawable/coffee.xml" value="0.378125" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/drawable/dot.xml" value="0.4578125" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/drawable/edit.xml" value="0.4671875" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/drawable/ic_baseline_subdirectory_arrow_right_24.xml" value="0.3609375" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/drawable/ic_launcher_background.xml" value="0.38177083333333334" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/drawable/refresh.xml" value="0.5734375" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/drawable/remove.xml" value="0.5734375" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/drawable/spinner_background.xml" value="0.50625" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/activity_home.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/activity_loading.xml" value="0.17" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/activity_main2.xml" value="0.365625" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/basket.xml" value="0.5" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/coffee.xml" value="0.33" />
-        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/data.xml" value="0.33" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/data.xml" value="0.5" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/data_basket.xml" value="0.5" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/data_order.xml" value="0.4866504854368932" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/data_pos.xml" value="0.45078125" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/datacategory.xml" value="0.4969660194174757" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/dialogf1_payment.xml" value="0.5006067961165048" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/dialogf3_fab1.xml" value="0.3459967320261438" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/dialogf3_fab2.xml" value="0.3385416666666667" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/frag3_category.xml" value="0.459375" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/frag3_menu.xml" value="0.459375" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/fragment_all.xml" value="0.17328042328042328" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/fragment_coffee.xml" value="0.365625" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/fragment_drink.xml" value="0.365625" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/fragment_etc.xml" value="0.365625" />
-        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/fragment_frag1.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/fragment_frag1.xml" value="0.5" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/fragment_frag2.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/fragment_frag3.xml" value="0.5" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/fragment_frag3_category.xml" value="0.5" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/fragment_frag3_menu.xml" value="0.459375" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/fragment_frag_all.xml" value="0.365625" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/receipt.xml" value="0.5" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/receipt_lv.xml" value="0.36484375" />
+        <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/layout/tmp.xml" value="0.44599514563106796" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Seungha/AndroidStudioProjects/pos/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22083333333333333" />
       </map>
