@@ -203,7 +203,7 @@ public class Frag1 extends Fragment implements View.OnClickListener {
         ArrayList<HashMap<String, String>> list = new ArrayList<>();
         for(Data d : Basket.items){
             HashMap<String,String> tmp = new HashMap<>();
-            tmp.put("name",String.format("%10s (%s)",d.name,d.isHot?"HOT":"ICE"));
+            tmp.put("name",d.name);
             tmp.put("num","x "+Basket.countingMap.get(d));
             list.add(tmp);
         }
@@ -213,13 +213,14 @@ public class Frag1 extends Fragment implements View.OnClickListener {
         lv.setAdapter(simpleAdapter);
         dlgView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+        public void onClick(View view) {
                 // order 데베에 넣기
                 Basket.ListConverter();
                 now = LocalDateTime.now();
                 Basket.payDate = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm"));
                 oDao.insert(Basket);
-                Basket = new Order();   // 새로 만들기
+                Basket.clear();
+                //Basket = new Order();   // 새로 만들기
                 adapterB.notifyDataSetChanged();
                 setTotal();
                 setCoupon(0);

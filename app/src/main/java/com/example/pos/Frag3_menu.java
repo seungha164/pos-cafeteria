@@ -6,17 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
-
-import java.util.List;
 
 public class Frag3_menu extends Fragment {
     Spinner spinner;
@@ -77,9 +72,9 @@ public class Frag3_menu extends Fragment {
     }
     void classifyRv(String condition){
         if(condition.contentEquals("All"))
-            adapter = new CustomAdapter(getContext(),frag2.dataList,frag2.dataDao);
+            adapter = new AdapterMenu(getContext(),frag2.dataList,frag2.dataDao);
         else
-            adapter = new CustomAdapter(getContext(),frag2.dataDao.getOrderbyCategory(condition),frag2.dataDao);
+            adapter = new AdapterMenu(getContext(),frag2.dataDao.getOrderbyCategory(condition),frag2.dataDao);
 
         rv.setAdapter(adapter);
     }

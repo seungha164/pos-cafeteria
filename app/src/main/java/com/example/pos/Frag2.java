@@ -2,23 +2,33 @@ package com.example.pos;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,7 +42,8 @@ public class Frag2 extends Fragment implements View.OnClickListener {
     FloatingActionButton fabAdd,fabCate, fabMenu;
     private Boolean isFabOpen = false;
     private Animation fab_open, fab_close;
-
+    Spinner spinner;
+    static final int REQUEST_CODE = 1;
     private String mParam1;
     private String mParam2;
 
@@ -40,6 +51,10 @@ public class Frag2 extends Fragment implements View.OnClickListener {
     CDataDao cDataDao;
     ArrayList<String> categorys;
     ArrayList<Data> dataList;
+
+   // addMenu => URL
+   private Uri uri;
+
     public Frag2(DataDao Ddao, CDataDao cDataDao, List<String> ctcrys, List<Data> dataList) {
         this.dataDao = Ddao;
         this.cDataDao =cDataDao;
@@ -68,6 +83,7 @@ public class Frag2 extends Fragment implements View.OnClickListener {
         fabMenu = view.findViewById(R.id.fabF3_menu);
         fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
+        spinner = view.findViewById(R.id.spinAddMenu);
         menu = new Frag3_menu(this);
         category = new Frag3_category();
         getChildFragmentManager().beginTransaction().add(R.id.vpFrag2,menu).commit();
@@ -164,6 +180,17 @@ public class Frag2 extends Fragment implements View.OnClickListener {
             }
         });
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == REQUEST_CODE) {
+            if (requestCode == REQUEST_CODE) {
+                uri = data.getData();
+                toast(uri.toString());
+            }
+        }
+    }
+
     void addMenu(){
         // 초기화
         final int[] mode = {-1};
@@ -174,6 +201,19 @@ public class Frag2 extends Fragment implements View.OnClickListener {
         builder.setView(dlgView);
         AlertDialog alertDialog = builder.create();
         alertDialog.setCancelable(false);
+        /*      */
+        ImageView imgView = dlgView.findViewById(R.id.imgAddMenu);
+        imgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                startActivityForResult(intent,REQUEST_CODE);
+                Glide.with(dlgView.getContext()).load(uri).into(imgView);
+            }
+        });
+        //spinnerAdapter = new ArrayAdapter<>(getContext(), );
+        //
         // et & category setting
         ImageButton back = dlgView.findViewById(R.id.ibtnDlgF3_Back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -234,11 +274,11 @@ public class Frag2 extends Fragment implements View.OnClickListener {
                         || chipCategory[0] =="" ||etName.getText().toString().trim().contentEquals(""))
                     Toast.makeText(getContext(), "모두 입력해주세요", Toast.LENGTH_SHORT).show();
                 else{
-                    String sName = etName.getText().toString().trim();
-                    if(findData(sName, mode[0] ==0?true:false))
+                    String sName = String.format("%s (%s)",etName.getText().toString().trim(),mode[0] ==0?"HOT":"ICE");
+                    if(findData(sName))
                         toast("이미 존재하는 메뉴입니다.");
                     else{
-                        Data data = setData(sName, mode[0] ==0?true:false,Integer.valueOf(etPay.getText().toString()), chipCategory[0]);
+                        Data data = setData(sName,Integer.valueOf(etPay.getText().toString()), chipCategory[0]);
                         dataDao.insert(data);
                         alertDialog.dismiss();
                         dataList.clear();
@@ -250,12 +290,15 @@ public class Frag2 extends Fragment implements View.OnClickListener {
             }
         });
     }
-    private Data setData(String n, boolean isH,int p,String c){
+
+
+
+    private Data setData(String n, int p,String c){
         Data d = new Data();
-        d.setName(n);
-        d.setHot(isH);
-        d.setPrice(p);
-        d.setCategory(c);
+        d.name= n;
+        d.price = p;
+        d.category = c;
+        d.imgUri = uri.toString();
         Toast.makeText(getContext(), d.print(), Toast.LENGTH_SHORT).show();
         return d;
     }
@@ -265,9 +308,9 @@ public class Frag2 extends Fragment implements View.OnClickListener {
                 return true;
         return false;
     }
-    boolean findData(String name,boolean isHot){
+    boolean findData(String name){
         for(Data d:dataList)
-            if(d.name.contentEquals(name) && d.isHot==isHot)
+            if(d.find(name))
                 return true;
         return false;
     }

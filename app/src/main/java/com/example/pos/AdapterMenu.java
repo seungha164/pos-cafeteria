@@ -1,6 +1,5 @@
 package com.example.pos;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,25 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.chip.Chip;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>{
+public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.CustomViewHolder>{
     private Context context;
     private List<Data> dataList;
     DataDao dao;
 
-    public CustomAdapter(Context context, List<Data> dataList, DataDao dao){
+    public AdapterMenu(Context context, List<Data> dataList, DataDao dao){
         this.context = context;
         this.dataList = dataList;
         this.dao = dao;
@@ -65,7 +60,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         void onBind(int i,Data d){
             idx.setText(""+(i+1));
             pay.setText(String.format("%d원",d.price));
-            name.setText(String.format("%s (%s)",d.name,d.isHot()?"HOT":"ICE"));
+            name.setText(d.name);
             category.setText(d.category);
             data = d;
             del.setOnClickListener(this);
@@ -76,7 +71,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         }
         void delDlg(){
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle(String.format("%s (%s)",data.name,(data.isHot==true?"HOT":"ICE")))
+            builder.setTitle(data.name)
                     .setMessage("해당 메뉴를 삭제하시겠습니까?");
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override

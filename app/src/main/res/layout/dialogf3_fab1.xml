@@ -5,11 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="20dp">
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,94 +25,155 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/close" />
-
     </FrameLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="?android:attr/listDivider" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="상품 명" />
-
-    <EditText
-        android:id="@+id/etDlgF3_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        app:singleSelection="true">
-
-        <com.google.android.material.button.MaterialButton
-
-            android:id="@+id/btnDlgHot"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="HOT"
-            android:textAlignment="center"  />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDlgIce"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ICE"
-            android:textAlignment="center"  />
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-
-    <TextView
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="금액 (원)" />
-    <EditText
-        android:id="@+id/etDlgF3_pay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number" />
-    <TextView
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="카테고리" />
-
-    <HorizontalScrollView
-        android:layout_marginTop="10dp"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EFEFEF"
-        android:padding="20dp">
+        android:fillViewport="true">
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <com.google.android.material.chip.ChipGroup
-                app:singleSelection="true"
-                android:id="@+id/chip_groupDlg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-    </HorizontalScrollView>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
-    <Button
-        android:layout_marginTop="50dp"
-        android:id="@+id/btnDlgF3_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="submit" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="상품 명" />
+
+            <EditText
+                android:id="@+id/etDlgF3_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+
+                    android:id="@+id/btnDlgHot"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="HOT"
+                    android:textAlignment="center" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDlgIce"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="ICE"
+                    android:textAlignment="center" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="금액 (원)" />
+
+                    <EditText
+                        android:id="@+id/etDlgF3_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="카테고리" />
+
+                    <Spinner
+                        android:id="@+id/spinAddMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="카테고리" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="#EFEFEF"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_groupDlg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:singleSelection="true" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="사진 (option)" />
+
+            <ImageView
+                android:id="@+id/imgAddMenu"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/coffee" />
+
+            <Button
+                android:id="@+id/btnDlgF3_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="submit" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
 
 </LinearLayout>

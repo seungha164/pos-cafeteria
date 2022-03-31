@@ -52,7 +52,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketView
             remove.setOnClickListener(this);
         }
         void onBind(Data data){
-            Name.setText(String.format("%s (%s)",data.name,(data.isHot?"HOT":"ICE")));
+            Name.setText(data.name);
             Num.setText(basket.countingMap.get(data)+"");
             myItem = data;
         }

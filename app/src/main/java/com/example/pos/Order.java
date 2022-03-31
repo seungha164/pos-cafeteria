@@ -32,7 +32,7 @@ public class Order {
     }
     boolean findItem(Data item){     // 이 오더 속 item 찾기
         for(Data d : items){
-            if(d.find(item))
+            if(d.find(item.name))
                 return true;
         }
         return false;
@@ -64,7 +64,7 @@ public class Order {
     void ListConverter(){
         StringBuilder stringBuilder = new StringBuilder();
         for(Data d:items){
-            stringBuilder.append(String.format("%s(%s)-%d?",d.name,(d.isHot?"HOT":"ICE"),countingMap.get(d)));
+            stringBuilder.append(String.format("%s-%d?",d.name,countingMap.get(d)));
         }
         oList = stringBuilder.toString();
     }
